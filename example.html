@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <!-- <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" /> -->
+    <!-- <script defer src="https://pyscript.net/latest/pyscript.js"></script> -->
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <py-env>
+        - requests
+        - re 
+        - string
+        - pandas as pd
+        - numpy as np
+        - nltk
+        - numpy
+        - matplotlib
+        - nltk.corpus
+        - paths:
+            - /data.py 
+    </py-env>
+</head>
+ <body>
+    <h1>PyScript Tests</h1>
+    <py-script>
+        print('Now you can!')
+    </py-script>
+
+    <py-script>
+        print("Let's compute n: ")
+        def wallis(n):
+            pi= 2
+            for i in range(1,n):
+                pi *= 4 * i**2 / (4 * i**2 -1)
+            return pi 
+
+        pi = wallis(100000)
+        s = f"pi is approximately {pi:.3f}"
+        print(s)
+    </py-script>
+
+    <b><p>Today is <u><label id="today"></label></u></p></b>
+    <div id="pi" class="alert alert-primary"></div>
+    <py-script>
+        import datetime as dt
+        pyscript.write('today', dt.date.today().strftime('%A %B %d, %Y'))
+        pyscript.write('pi', f'pi is approx {pi:.3f}')
+    </py-script>
+
+    <h1>Let's plot random numbers</h1>
+    <div id="plot"></div>
+    <py-script output="plot">
+        import matplotlib.pyplot as plt
+        from data import make_x_and_y
+
+        x,y= make_x_and_y(n=1000)
+
+        fig, ax= plt.subplots()
+        ax.scatter(x,y)
+        fig 
+    </py-script>
+
+    <h1><b>pyscript REPL</b></h1>
+    Tip: press Shift-ENTER to evaluate a cell
+    <br>
+    <div>
+        <py-repl id="my-repl" auto-generate="true"> </py-repl>
+    </div>
+
+    <!-- <py-script> -->
+        
+            <!-- !pip install  -->
+        <!-- import requests 
+        from bs4 import BeautifulSoup
+        import re
+        import string
+        import pandas as pd
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import seaborn as sn
+        import nltk
+        nltk.download()
+        from nltk.corpus import stopwords
+        from textblob import TextBlob
+
+        # Downloading the required NLTK packages
+        nltk.download('punkt')
+        nltk.download('averaged_perceptron_tagger')
+        nltk.download('wordnet')
+        nltk.download('stopwords') -->
+    <!-- </py-script> -->
+</body>
+</html>
