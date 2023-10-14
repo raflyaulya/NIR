@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify
-# from your_analysis_module import analyze_reviews                  # Ganti dengan modul analisis kamu
 from analysis_customer_reviews import format_airline_name           # Ganti dengan modul analisis kamu
 
 app = Flask(__name__)
