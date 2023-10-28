@@ -1,17 +1,21 @@
-from flask import Flask, render_template, request, jsonify
-from analysis_customer_reviews import format_airline_name           # Ganti dengan modul analisis kamu
+from flask import Flask, render_template, request, url_for 
+from file_analyze import airline_func           # change ur analysis library
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/analyze', methods=['POST'])
-def analyze():
-    airline_name = request.form['airline_name']
-    result = format_airline_name(airline_name)  # Panggil fungsi analisis Python kamu
-    return jsonify(result)
+@app.route('/finalResult', methods=['POST'])
+def finalResult():
+    if request.method == 'POST':
+        res_airlineName = request.form['airlineName']
+        result = airline_func(res_airlineName)  
+        return render_template('finalResult.html', result=result)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
