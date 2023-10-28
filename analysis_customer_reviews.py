@@ -33,7 +33,7 @@ def format_airline_name(airline_name):
 
 airline_name = input('input the airline\'s name:')
 output_name = format_airline_name(airline_name)
-# print(output_name)  # Output: british-airways
+print(output_name)  # Output: british-airways
 
 
 # base_url = "https://www.airlinequality.com/airline-reviews/british-airways"
