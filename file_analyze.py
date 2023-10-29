@@ -53,7 +53,7 @@ def airline_func(airline_name):
     df.reviews = df.reviews.apply(lambda x: x.replace(unnecessary_word3, ''))
 
 
-    randcol = random.choice(df['reviews'])
+    randcol = random.choice(df['reviews'])   # untuk mencari RANDOM REVIEWS
     
     return randcol   # print out RANDOM REVIEWS 
 
