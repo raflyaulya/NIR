@@ -6,11 +6,17 @@
     <title>Result Page</title>
 </head>
 <body>
-    <h1>INI ADALAH FINAL RESULT</h1>
+    <h1>This is the Final Result of {{airlineName}}</h1>{{airlineName}}
 
     <div>
       {{ result }}
     </div>
+    <br>
+    
+    <h1>HASIL GAMBAR</h1>
+    <img src="data:image/png;base64,{{ plot }}" alt="plot">
+
+    <br><br>
 
     <a href="{{ url_for('index') }}">Back to Main Page</a>
     <footer>Footer</footer>
