@@ -6,15 +6,24 @@
     <title>Result Page</title>
 </head>
 <body>
-    <h1>This is the Final Result of {{airlineName}}</h1>{{airlineName}}
+    <h1>This is the Final Result of Positive {{airlineName}}</h1>{{airlineName}}
 
     <div>
-      {{ result }}
+      {{ result_positive }}
     </div>
     <br>
+    <h1>This is the Final Result of Negative {{airlineName}}</h1>{{airlineName}}
+
+    <div>
+      {{ result_negative }}
+    </div>
     
-    <h1>HASIL GAMBAR</h1>
-    <img src="data:image/png;base64,{{ plot }}" alt="plot">
+    <h1>Result of Data Visualization: BAR Chart</h1>
+    <img src="data:image/png;base64,{{ plots[0] }}" alt="Bar Chart">
+    <br>
+    
+    <h1>Result of Data Visualization: PIE Chart</h1>
+    <img src="data:image/png;base64,{{ plots[1] }}" alt="Pie Chart">
 
     <br><br>
 
