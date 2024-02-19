@@ -1,13 +1,36 @@
-body {
-    font-family: Arial, sans-serif;
-    position: center;
+*{
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
 }
 
+/* header{
+    background-image: url(/asets/airlineBackground.png);
+    background-image: url(../airlineBackground.png);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+} */
+
+
+body {
+    font-family: Arial, sans-serif;
+    /* position: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5; */
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
 h1 {
-    background-color: white;
+    /* background-color: black; */
     color: rgb(0, 0, 0);
     /* padding: 20px; */
     margin: 0;
@@ -23,9 +46,9 @@ form {
     margin: 0 auto;
     width: 100%;
     max-width: 500px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* background-color: white; */
+    /* border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
 }
 
 input {
@@ -63,3 +86,14 @@ p {
     padding: 10px; 
     margin: 0; 
 }
+
+/* .background {
+    background-image: url('D:\ИПМКН\Семестр 5\НИР\NIR\asets\airlineBackground.png');
+    height: 100vh;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat; */
+    /* color: white;
+    background-color: rebeccapurple; */
+    /* background-size: cover;
+  } */
