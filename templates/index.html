@@ -5,14 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <title>Main Page</title>
+    <style>
+        body{
+            background-image: url( "{{ url_for('static',filename='images/airlineBackground.png') }} ");
+            background-size: cover;
+            background-position: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;    height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
 <body>
+    <header>
+    <!-- <div class="background"></div> -->
+    <div class="container">
+        <h1>Analyze your favourite airline!</h1> <br><br>
+        <!-- <h3>Enter airline's name below</h3> -->
     <form action="{{ url_for('finalResult') }}" method="post">
-        <label for="airlineName">Airline Name:</label>
+        <!-- <label for="airlineName">Airline Name:</label> -->
         <input type="text" id="airlineName" name="airlineName" required>
        
         <button type="submit" >Analyse</button>
     </form>
+</div>
+</header>
 
     <!-- <div id="result"></div> -->
 </body>
