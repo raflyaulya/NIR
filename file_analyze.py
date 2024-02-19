@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS
 import io
 import base64
-# import seaborn as sns
+import seaborn as sn
 
 import nltk
 # nltk.download()
@@ -70,7 +70,7 @@ def airline_func(airline_name):
     df.reviews = df.reviews.apply(lambda x: x.replace(unnecessary_word3, ''))
 
 
-    # randcol = random.choice(df['reviews'])   # untuk mencari RANDOM REVIEWS
+    # randcol = random.choice(df['reviews'])   #  untuk mencari RANDOM REVIEWS
     
     # return randcol   # print out RANDOM REVIEWS 
 
@@ -116,11 +116,17 @@ def airline_func(airline_name):
 
     # print('Please select which sentiment reviews you want to display')
     # review_option = input('positive / negative / neutral?\n')
-    review_option = 'Positive'        #===============================
+    positive_option = 'Positive'        #===============================
 
-    if review_option == 'Positive':
+    if positive_option == 'Positive':
         positive_reviews = df[df['sentiment'] == 'Positive']
-    random_review = np.random.choice(positive_reviews['reviews'])
+    result_positive = np.random.choice(positive_reviews['reviews'])
+
+    negative_review = 'Negative'        #===============================
+
+    if negative_review == 'Negative':
+        negative_reviews = df[df['sentiment'] == 'Negative']
+    result_negative = np.random.choice(negative_reviews['reviews'])
 
     # positive_reviews = df[df['sentiment']== review_option]   ====================
     # random_review = np.random.choice(positive_reviews['reviews']) ======================
@@ -144,74 +150,191 @@ def airline_func(airline_name):
 #  ==================    POSITIVE    ==================
 # ==========              ANALYZING DATA         =====================
 # print('Please select which sentiment reviews you want to analyze')
-    review_option = 'Positive'
+    # review_option = 'Positive'
 
-    sentiment_reviews = df[df['sentiment'] == review_option]
-    sentiment_reviews = sentiment_reviews['reviews'].tolist()
-    sentiment_reviews = ' '.join(sentiment_reviews)
-    text = sentiment_reviews
-    # text
-    text = text.lower()
-    text = re.sub(r'\d+','', text)
+    # sentiment_reviews = df[df['sentiment'] == review_option]
+    # sentiment_reviews = sentiment_reviews['reviews'].tolist()
+    # sentiment_reviews = ' '.join(sentiment_reviews)
+    # text = sentiment_reviews
+    # # text
+    # text = text.lower()
+    # text = re.sub(r'\d+','', text)
 
-    text = text.translate(str.maketrans('', '', string.punctuation))
+    # text = text.translate(str.maketrans('', '', string.punctuation))
 
-    tokens = [word for word in text.split()]
-    # nltk.download()
-    custom_stopwords = stopwords.words('english')
-    clean_tokens = tokens[:]
-    # custom_stopwords = set(stopwords.words('english'))
-    # clean_tokens = [token for token in tokens if token.lower() not in custom_stopwords]
+    # tokens = [word for word in text.split()]
+    # # nltk.download()
+    # custom_stopwords = stopwords.words('english')
+    # clean_tokens = tokens[:]
+    # # custom_stopwords = set(stopwords.words('english'))
+    # # clean_tokens = [token for token in tokens if token.lower() not in custom_stopwords]
 
-    for token in tokens:
-        if token in custom_stopwords:   #words('english'):
-            clean_tokens.remove(token)
+    # for token in tokens:
+    #     if token in custom_stopwords:   #words('english'):
+    #         clean_tokens.remove(token)
 
-    freq = nltk.FreqDist(clean_tokens)
-    for key, val in freq.items():
-        print(str(key), ':', str(val))
-
-
-    # # ==============   VISUALISASI DATA     =============
-    # # =================================================================
-    # freq_pict = freq.plot(30)       
-
-    lis = []
-    freq = nltk.FreqDist(clean_tokens)
-    for key in freq.items():
-        lis.append(str(key[0]))
-
-    # print(lis)
-    # print('==================\n')
+    # freq = nltk.FreqDist(clean_tokens)
+    # for key, val in freq.items():
+    #     print(str(key), ':', str(val))
 
 
-    def visual_pict(lis):
-        stopwords= set(STOPWORDS)
-        wordcloud = WordCloud(width=800, height=800,
-                            background_color='white', stopwords=stopwords,
-                            max_words=50,
-                            min_font_size=10).generate(' '.join(lis))
+    # # # ==============   VISUALISASI DATA     =============
+    # # # =================================================================
+    # # freq_pict = freq.plot(30)       
 
-        plt.figure(figsize= (8,8), facecolor=None)
-        plt.imshow(wordcloud, interpolation='bilinear')
-        plt.axis('off')
-        plt.tight_layout(pad=0)
-        show_pict = plt.show()
+    # lis = []
+    # freq = nltk.FreqDist(clean_tokens)
+    # for key in freq.items():
+    #     lis.append(str(key[0]))
 
-        return show_pict
+    # # print(lis)
+    # # print('==================\n')
+
+
+    # def visual_pict(lis):
+    #     stopwords= set(STOPWORDS)
+    #     wordcloud = WordCloud(width=800, height=800,
+    #                         background_color='white', stopwords=stopwords,
+    #                         max_words=50,
+    #                         min_font_size=10).generate(' '.join(lis))
+
+    #     plt.figure(figsize= (8,8), facecolor=None)
+    #     plt.imshow(wordcloud, interpolation='bilinear')
+    #     plt.axis('off')
+    #     plt.tight_layout(pad=0)
+    #     show_pict = plt.show()
+
+    #     return show_pict
     
-    res_fin = visual_pict(lis)
+    # res_fin = visual_pict(lis)
 
-    buffer = io.BytesIO(res_fin)
+    # datasets=[
+    #     {'type':'bar', 'data': df.groupby('sentiment')['reviews'].count()},
+    #     {'type': 'pie', 'data': df.groupby(['sentiment']).sum()['subjectivity']}
+    # ]
+
+    # df = pd.DataFrame({
+    #     'sentiment': ['Positive', "Neutral", 'Negative'],
+    #     'subjectivity':[100,200,150],
+    #     'reviews': [300,500,400]
+    # })
+
+    plots =[]
+    
+    # BAR CHART
+    # tipe_subjectivity = df.groupby(['sentiment']).sum()['subjectivity']
+    # tipe_subjectivity.plot(kind='bar')
+    # plt.ylabel('Subjectivity')
+    # plt.xlabel('Sentiment')
+    # plt.title('Sentiment across Subjectivity')
+
+    bar_sentiment_counts = df.groupby('sentiment')['reviews'].count()
+    sn.barplot(x=bar_sentiment_counts.index, y=bar_sentiment_counts.values)
+    plt.title('Sentiment Analysis Results')
+    plt.xlabel('Sentiment')
+    plt.ylabel('Number of Reviews')
+
+    # print('Please select which sentiment reviews you want to analyze')
+    # review_option = input('Positive / Negative / Neutral?\n')
+
+    # sentiment_reviews = df[df['sentiment'] == positive_option]
+    # sentiment_reviews = sentiment_reviews['reviews'].tolist()
+    # sentiment_reviews = ' '.join(sentiment_reviews)
+    # text = sentiment_reviews
+    # text = text.lower()
+    # text = re.sub(r'\d+','', text)
+    # text = text.translate(str.maketrans('', '', string.punctuation))
+    # tokens = [word for word in text.split()]
+
+    # # nltk.download()
+    # clean_tokens = tokens[:]
+    # for token in tokens:
+    #     if token in stopwords.words('english'):
+    #         clean_tokens.remove(token)
+
+    # freq = nltk.FreqDist(clean_tokens)
+    # for key, val in freq.items():
+    #     print(str(key), ':', str(val))
+    # freq.plot(30)
+    # plt.title(positive_option + " Word Frequencies")
+    # ====================    THIS IS THE END OF TENDENTSI WORD  ANALYSIS =========================
+
+    buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
-    buffer.seek(0)  # rewind the buffer to start of content
+    buffer.seek(0)
 
-    # encode plot ke dalam base64
     image_png = buffer.getvalue()
-    graph = base64.b64encode(image_png).decode()
+    plot = base64.b64encode(image_png).decode()
+    plots.append(plot)
     buffer.close()
 
-    return graph, random_review
+    plt.clf()
+
+
+    # PIE CHART
+    pie_sentiment_counts = df.groupby('sentiment')['reviews'].count()
+    plt.pie(pie_sentiment_counts.values, labels=pie_sentiment_counts.index, autopct='%1.2f%%')
+    plt.title('Sentiment Analysis Results')
+    
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    image_png = buffer.getvalue()
+    plot = base64.b64encode(image_png).decode()
+    plots.append(plot)
+    buffer.close()
+    
+    plt.clf()
+
+    return plots, result_positive, result_negative
+
+
+    # for dataset in datasets:
+    #     data = dataset['data']
+
+    #     if dataset['type'] =='bar':
+    #         sentiment_counts = df.groupby('sentiment')['reviews'].count()
+    #         plt.pie(sentiment_counts.values, labels=sentiment_counts.index, autopct='%1.2f%%')
+    #         plt.title('Sentiment Analysis Results')
+    #     elif dataset['type']== 'pie':
+    #         tipe_subjectivity = df.groupby(['sentiment']).sum()['subjectivity']
+    #         tipe_subjectivity.plot(kind='bar')
+    #         plt.ylabel('Subjectivity')
+    #         plt.xlabel('Sentiment')
+    #         plt.title('Sentiment across Subjectivity')
+
+
+
+    # sentiment_counts = df.groupby('sentiment')['reviews'].count()
+
+    # plt.pie(sentiment_counts.values, labels=sentiment_counts.index, autopct='%1.2f%%')
+    # plt.title('Sentiment Analysis Results')
+
+    # Visualization of Sentiment across Polarity
+# the "Positive" sentiment has the most than the Negative and Neutral
+
+    # tipe_subjectivity = df.groupby(['sentiment']).sum()['subjectivity']
+    # tipe_subjectivity.plot(kind='bar')
+    # plt.ylabel('Subjectivity')
+    # plt.xlabel('Sentiment')
+    # plt.title('Sentiment across Subjectivity')
+    # plt.show()
+
+    #     buffer = io.BytesIO()
+    #     plt.savefig(buffer, format='png')
+    #     buffer.seek(0)  # rewind the buffer to start of content
+
+    #     # encode plot ke dalam base64
+    #     image_png = buffer.getvalue()
+    #     graph1 = base64.b64encode(image_png).decode()
+    #     buffer.close()
+
+    #     plt.clf()
+
+    # return graph1, random_review
+
+
     # return res_fin
 
 # name_airline = 'british airways'
