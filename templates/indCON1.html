@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiple Plots</title>
+</head>
+<body>
+    <h1>Multiple Plots</h1>
+    {% for plot in plots %}
+        <img src="data:image/png;base64,{{ plot }}" alt="plot">
+    {% endfor %}
+    <h2>Hasil Kalkulasi</h2>
+    <ul>
+        {% for hasil in hasil_kalkulasi %}
+            <li>{{ hasil }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
