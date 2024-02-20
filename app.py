@@ -18,5 +18,5 @@ def finalResult():
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0') #debug = TRUE
     # d:/ИПМКН/Семестр 5/НИР/NIR/app.py
