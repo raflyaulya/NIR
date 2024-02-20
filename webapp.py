@@ -1,18 +1,6 @@
 from flask import Flask, render_template, request, url_for 
 # import string
 # import re
-!pip install bs4 pandas as pd
-!pip numpy 
-!pip matplotlib
-!pip wordcloud 
-!pip io
-!pip base64
-!pip seaborn 
-!piprequests
-!pip nltk
-!pip nltk.corpus
-!pip textblob 
-
 from bs4 import BeautifulSoup
 import random
 import pandas as pd
