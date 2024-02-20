@@ -1,5 +1,3 @@
-import render
-import requests
 # import string
 # import re
 from bs4 import BeautifulSoup
@@ -11,6 +9,7 @@ from wordcloud import WordCloud, STOPWORDS
 import io
 import base64
 import seaborn as sn
+import requests
 
 import nltk
 # nltk.download()
