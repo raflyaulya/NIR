@@ -1,6 +1,6 @@
 import requests
-import string
-import re
+# import string
+# import re
 from bs4 import BeautifulSoup
 import random
 import pandas as pd
