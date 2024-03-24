@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page</title>
+</head>
+<body>
+    <h1>This is the Final Result of Positive</h1>
+    <div>
+      {{ result_positive }}
+    </div>
+    <br>
+    
+    <h1>Result of Data Visualization: BAR Chart</h1>
+    <img src="data:image/png;base64,{{ plots[1] }}" alt="Bar Chart">
+    <br>
+    
+    <h1>Result of Data Visualization: PIE Chart</h1>
+    <img src="data:image/png;base64,{{ plots[2] }}" alt="Pie Chart">
+
+    <h1>Word Frequency Plot</h1>
+    <img src="data:image/png;base64, {{ plots[0] }}" alt="Word Frequency Plot">
+
+    <br><br>
+
+    <a href="{{ url_for('index') }}">Back to Main Page</a>
+    <footer>Footer</footer>
+</body>
+</html>
