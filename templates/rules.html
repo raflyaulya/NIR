@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>Main Page</title>
+    <style>
+        body{
+            background-image: url( "{{ url_for('static',filename='images/airlineBackground.png') }} ");
+            /* background-color: transparent; */
+            backdrop-filter: blur(5px);
+            background-size: cover;
+            background-position: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;    height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('index') }}">Back to Main Page</a>
+    <!-- <a href="index.html">Back to Main Page</a> -->
+    
+    <div>
+        <p>
+        UNTUK MASUKIN NAMA AIRLINES NYA, NTAR DI WEBSITE HARUS DI PERINGATIN DULU, <br>
+        SUPAYA NULIS NAMA AIRLINESNYA GAK SALAH <br>
+        CONTOH: air france BETUL,, airfrance SALAH <br>
+        CONTOH: air asia SALAH,, airasia BENAR <br>
+        </p>
+    </div>
+
+</body>
+</html>
