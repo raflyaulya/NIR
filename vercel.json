@@ -1,0 +1,14 @@
+{
+    "builds":[
+        {
+            "src": "NIR/app.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes":[
+        {
+            "src": "/(.*)",
+            "dest":"NIR/app.py"
+        }
+    ]
+}
