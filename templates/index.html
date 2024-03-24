@@ -17,23 +17,41 @@
             background-size: cover;
             background-position: center;
         }
+
+        ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            display: inline;
+        }
     </style>
 </head>
 <body>
+    <!-- <a href="{{ url_for('rules') }}" method="post">Rules</a> -->
+    <ul>
+        <li>
+            <form action="{{ url_for('rules') }}" method="post">
+                <button type="submit">Rules</button>
+                </form>
+        </li>
+    </ul>
+    <!-- <a href="rules.html">Rules</a> -->
+
     <header>
-    <!-- <div class="background"></div> -->
     <div class="container">
         <h1>Analyze your favourite airline!</h1> <br><br>
         <!-- <h3>Enter airline's name below</h3> -->
-    <form action="{{ url_for('finalResult') }}" method="post">
-        <!-- <label for="airlineName">Airline Name:</label> -->
-        <input type="text" id="airlineName" name="airlineName" required>
+    <form action="{{ url_for('finalResult') }}" method="post">   
+        <!-- <label for="airlineName">Airline Name:</label>   URL_FOR(finalResult) -->
+        <input type="text" id="airlineName" placeholder="type airline name here..." name="airlineName" required>
+        <input type="text" id="selectSentiment" name="selectSentiment" placeholder="type Positive or Negative here..." required>
        
         <button type="submit" >Analyse</button>
     </form>
 </div>
 </header>
 
-    <!-- <div id="result"></div> -->
 </body>
 </html>
