@@ -6,7 +6,7 @@
     <title>Result Page</title>
 </head>
 <body>
-    <h1>This is the Final Result of Positive {{airlineName}}</h1>{{airlineName}}
+    <!-- <h1>This is the Final Result of Positive</h1>
 
     <div>
       {{ result_positive }}
@@ -16,14 +16,28 @@
 
     <div>
       {{ result_negative }}
-    </div>
+    </div> -->
+
+    <h1>Airline's name: {{ res_airlineName }}</h1>
+    <br>
+    <!-- <h1>Sentiment choosen: {{selectSentiment}}</h1> -->
+
+    <h1>Description of {{ selectSentiment }} sentiment</h1><br>
+    <div>
+      {{ res_sentiment }}
+    </div> 
+    <br>
+
     
     <h1>Result of Data Visualization: BAR Chart</h1>
-    <img src="data:image/png;base64,{{ plots[0] }}" alt="Bar Chart">
+    <img src="data:image/png;base64,{{ plots[1] }}" alt="Bar Chart">
     <br>
     
     <h1>Result of Data Visualization: PIE Chart</h1>
-    <img src="data:image/png;base64,{{ plots[1] }}" alt="Pie Chart">
+    <img src="data:image/png;base64,{{ plots[2] }}" alt="Pie Chart">
+
+    <h1>Word Frequency Plot</h1>
+    <img src="data:image/png;base64, {{ plots[0] }}" alt="Word Frequency Plot">
 
     <br><br>
 
