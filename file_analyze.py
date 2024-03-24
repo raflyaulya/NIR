@@ -1,11 +1,11 @@
-# import string
-# import re
+import string
+import re
 from bs4 import BeautifulSoup
 import random
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from wordcloud import WordCloud, STOPWORDS
+# from wordcloud import WordCloud, STOPWORDS
 import io
 import base64
 import seaborn as sn
@@ -14,6 +14,7 @@ import requests
 import nltk
 # nltk.download()
 from nltk.corpus import stopwords
+from nltk.probability import FreqDist
 from textblob import TextBlob
 # nltk.download('punkt')
 # nltk.download('averaged_perceptron_tagger')
@@ -22,19 +23,13 @@ from textblob import TextBlob
 
 
     # return formatted_name
-    
-
-                                        # UNTUK MASUKIN NAMA AIRLINES NYA, NTAR DI WEBSITE HARUS DI PERINGATIN DULU, 
-                                        # SUPAYA NULIS NAMA AIRLINESNYA GAK SALAH 
-                                        # CONTOH: air france BETUL,, airfrance SALAH 
-                                        # CONTOH: air asia SALAH,, airasia BENAR
 
 # airline_name = input('input the airline\'s name:')
-# output_name = airline_func(airline_name)
+# output_name = airline_func(airline_name)  
 # print(output_name)  # Output: british-airways
 
 
-def airline_func(airline_name):
+def airline_func(airline_name, selectSentiment):
     formatted_name = '-'.join(airline_name.split())
 # base_url = "https://www.airlinequality.com/airline-reviews/british-airways"
     base_url = f"https://www.airlinequality.com/airline-reviews/{formatted_name}"         # output_name
@@ -116,17 +111,30 @@ def airline_func(airline_name):
 
     # print('Please select which sentiment reviews you want to display')
     # review_option = input('positive / negative / neutral?\n')
-    positive_option = 'Positive'        #===============================
 
-    if positive_option == 'Positive':
-        positive_reviews = df[df['sentiment'] == 'Positive']
-    result_positive = np.random.choice(positive_reviews['reviews'])
 
-    negative_review = 'Negative'        #===============================
+    # positive_option = 'Positive'        #===============================
 
-    if negative_review == 'Negative':
-        negative_reviews = df[df['sentiment'] == 'Negative']
-    result_negative = np.random.choice(negative_reviews['reviews'])
+    def func_selectSentiment(selectSentiment):
+        lis_res_sentiment = []
+        positive_value = ['Positive', 'positive']
+        negative_value = ['Negative', 'negative']
+
+        if selectSentiment in positive_value:
+            positive_reviews = df[df['sentiment'] == 'Positive']
+            result_positive = np.random.choice(positive_reviews['reviews'])
+            lis_res_sentiment.append(result_positive)
+        elif selectSentiment in negative_value:   # negative_review = 'Negative'        #===============================
+            negative_reviews = df[df['sentiment'] == 'Negative']
+            result_negative = np.random.choice(negative_reviews['reviews'])
+            lis_res_sentiment.append(result_negative)
+
+        return lis_res_sentiment[0]
+    
+    res_sentiment = func_selectSentiment(selectSentiment=selectSentiment)
+
+    plots =[]
+
 
     # positive_reviews = df[df['sentiment']== review_option]   ====================
     # random_review = np.random.choice(positive_reviews['reviews']) ======================
@@ -147,48 +155,70 @@ def airline_func(airline_name):
 
 
 
-#  ==================    POSITIVE    ==================
+#  ==================    POSITIVE    ==================  ================================================================
 # ==========              ANALYZING DATA         =====================
 # print('Please select which sentiment reviews you want to analyze')
     # review_option = 'Positive'
 
-    # sentiment_reviews = df[df['sentiment'] == review_option]
-    # sentiment_reviews = sentiment_reviews['reviews'].tolist()
-    # sentiment_reviews = ' '.join(sentiment_reviews)
-    # text = sentiment_reviews
-    # # text
-    # text = text.lower()
-    # text = re.sub(r'\d+','', text)
+    sentiment_reviews = df[df['sentiment'] == 'Positive']
+    sentiment_reviews = sentiment_reviews['reviews'].tolist()
+    sentiment_reviews = ' '.join(sentiment_reviews)
+    text = sentiment_reviews
+    # text
+    text = text.lower()
+    text = re.sub(r'\d+','', text)
 
-    # text = text.translate(str.maketrans('', '', string.punctuation))
+    text = text.translate(str.maketrans('', '', string.punctuation))
 
-    # tokens = [word for word in text.split()]
-    # # nltk.download()
-    # custom_stopwords = stopwords.words('english')
-    # clean_tokens = tokens[:]
-    # # custom_stopwords = set(stopwords.words('english'))
-    # # clean_tokens = [token for token in tokens if token.lower() not in custom_stopwords]
+    tokens = [word for word in text.split()]
+    # nltk.download()
+    custom_stopwords = stopwords.words('english')
+    clean_tokens = tokens[:]
 
-    # for token in tokens:
-    #     if token in custom_stopwords:   #words('english'):
-    #         clean_tokens.remove(token)
+    for token in tokens:
+        if token in custom_stopwords:   #words('english'):
+            clean_tokens.remove(token)
 
     # freq = nltk.FreqDist(clean_tokens)
+    freq_dist = FreqDist(clean_tokens)
     # for key, val in freq.items():
     #     print(str(key), ':', str(val))
-
 
     # # # ==============   VISUALISASI DATA     =============
     # # # =================================================================
     # # freq_pict = freq.plot(30)       
+    # # freq.plot(30, )   #cumulative=False
+
+
+    most_common_words = freq_dist.most_common(20)  #show
+
+    words , frequencies = zip(*most_common_words)
+
+    # plt.figure(figsize=(10,6))
+    plt.bar(words, frequencies)
+    plt.xlabel('Words')
+    plt.ylabel('Frequency')
+    plt.title('Word Frequency PLot')
+    plt.xticks(rotation=45)
+
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    image_png = buffer.getvalue()
+    plot = base64.b64encode(image_png).decode()
+    plots.append(plot)
+    buffer.close()
+    
+    plt.clf()      #  ========================================================================
 
     # lis = []
     # freq = nltk.FreqDist(clean_tokens)
     # for key in freq.items():
     #     lis.append(str(key[0]))
 
-    # # print(lis)
-    # # print('==================\n')
+    # print(lis)
+    # print('==================\n')
 
 
     # def visual_pict(lis):
@@ -218,8 +248,6 @@ def airline_func(airline_name):
     #     'subjectivity':[100,200,150],
     #     'reviews': [300,500,400]
     # })
-
-    plots =[]
     
     # BAR CHART
     # tipe_subjectivity = df.groupby(['sentiment']).sum()['subjectivity']
@@ -287,7 +315,7 @@ def airline_func(airline_name):
     
     plt.clf()
 
-    return plots, result_positive, result_negative
+    return plots, res_sentiment    #result_positive, result_negative
 
 
     # for dataset in datasets:
